@@ -1,13 +1,18 @@
 const express = require('express');
 const bodyparser = require('body-parser');
+const morgan=require('morgan');
 
 const app = express();
 
-app.use(bodyparser.urlencoded({extended:true}));//html sayfaalrında gelen datayı ayrıştırmak için kullanırız.
+app.use(morgan("tiny"));
 
+app.use(bodyparser.urlencoded({extended:true}));//html sayfaalrında gelen datayı ayrıştırmak için kullanırız.
 const port = 3000
 
    app.get('/azat', (req, res) => {
+         console.log("Name:"+req.body.name);
+         console.log("Surname:"+req.body.surname);
+
     res.send('Hello World!')
    })
 
