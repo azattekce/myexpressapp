@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>Fiyat Servisi</title>
+</head>
+
+<body>
+  <h1>İl İlçe Göre Fiyat Seç 🌮</h1>
+    <form action="/ilce" id="form" class="form" method="POST">
+      <select name="type" class="form-select">
+        <option value=""  data-display="Select">Random type</option>
+        <%if (locals.data) {%>
+          <% data.forEach(city=> { %>
+            <option value=<%=city.districtCode%>><%=city.provinceName %> - <%= city.districtName %></option>
+    
+            <%})%>
+
+          <%}%>
+      </select>
+      <button type="submit" class="form-submit">İlçleri getir</button>
+    </form>
+ <br>
+    <form action="/ilce" id="form" class="form" method="POST">
+      <select name="type" class="form-select">
+        <option value=""  data-display="Select">Random type</option>
+        <%if (locals.data) {%>
+          <% data.forEach(city=> { %>
+            <option value=<%=city.districtCode%>><%=city.provinceName %> - <%= city.districtName %></option>
+    
+            <%})%>
+
+          <%}%>
+      </select>
+      <button type="submit" class="form-submit">İlçleri getir</button>
+    </form>
+
+
+
+ <br>
+    <section id="cards" class="flex">
+      <%if (locals.data) {%>
+
+         
+        <h3>Fiyatlar:</h3>
+        <ul id="il">
+         <% data.forEach(city=> { %>
+            <li>
+              <h3><%= city.provinceName %> </h3><br>
+              İlçe:<%= city.districtName %>
+                <% city.prices.forEach(ilce=> { %>
+                  <article class="card-item">
+                      <div class="card-info">
+                           <span class="card-participants">
+                            Ürün: <%= ilce.productName %> <br>
+                            Ürün Ks.: <%= ilce.productShortName %> <br>
+                            Birim Fiyat:<%= ilce.amount %>
+                            <span class="card-number"></span>
+                        </span>
+                      </div>
+                    </article>
+
+
+                   <% }) %>
+             
+
+            </li>
+            <% }) %>
+        </ul>
+
+
+        <%}%>
+
+          <%if (locals.error) {%>
+            <div id="tag-error" class="tag-error">
+              <%=error%>
+            </div>
+            <%}%>
+    </section>
+ 
+</body>
+
+</html>
